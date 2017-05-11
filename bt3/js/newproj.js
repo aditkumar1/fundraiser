@@ -1,6 +1,4 @@
 $("button#proj-crt").on('click', function() {
-
-
 	var projName = $('#project-name').val();
 	var cid = $('#cid-bt').val();
 	var projDesc = $( '#project-desc' ).val();
@@ -8,7 +6,7 @@ $("button#proj-crt").on('click', function() {
 	var project_comp = $('#project-comp').val();
 	var min_money = $('#min-money').val();
 	var max_money = $('#max-money').val();
-
+	var file=	$('#file').val();
 	var timestamp = new Date(end_date);
 	var timestamp1 = new Date(project_comp);
 	if((!(timestamp.toString() === "Invalid Date")) && (!(timestamp1.toString() === "Invalid Date"))){
@@ -17,7 +15,7 @@ $("button#proj-crt").on('click', function() {
 		$.ajax({
 			url: 'ajax/new-proj.php',
 			type: 'POST',
-			data: {cid: cid,Pname: projName,Pdescription: projDesc,Plast_date: end_date,Pproj_date: project_comp,Pmin_price: min_money,Pmax_price: max_money},
+			data: {cid: cid,Pname: projName,Pdescription: projDesc,Plast_date: end_date,Pproj_date: project_comp,Pmin_price: min_money,Pmax_price: max_money,file:file},
 			success: function(data){
 				// if(data.trim() == 'Database query failed.'){
 				// 	alert('Failed');

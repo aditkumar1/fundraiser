@@ -10,7 +10,8 @@ if(isset($_POST['cid']) && isset($_POST['Pname']) && isset($_POST['Pdescription'
 	$Pmin_price = $_POST['Pmin_price'];
 	$Pmax_price = $_POST['Pmax_price'];		
 	$username = $_SESSION['username'];
-
+	$name= $_FILES['file']['name'];
+	$tmp_name= $_FILES['file']['tmp_name'];
 
 
 	$dbhost = "localhost";

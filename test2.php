@@ -13,8 +13,10 @@ Description of Video: <input type="text" name="description_entered"/><br><br>
 <input type="submit" name="submit" value="Upload"/>
 
 </form>
-<?php 
-
+<?php
+error_reporting(E_ERROR | E_PARSE); 
+$pid=$_GET['pid'];
+$uid=$_GET['uid'];
 $name= $_FILES['file']['name'];
 $tmp_name= $_FILES['file']['tmp_name'];
 $submitbutton= $_POST['submit'];
@@ -29,6 +31,7 @@ $descript= 0;
 
 if (empty($description))
 {
+$description='new resource';	
 $descript= 1;
 }
 
@@ -67,17 +70,11 @@ if(mysqli_connect_error()) {
 	die("Database connection failed" . mysqli_connect_error() . "(" . mysqli_connect_errno().")"
 		);
 }
-$pid=11;
-$uid=1;
 $flag=1;
 
 if((!empty($description)) && ($success == 1)){
 mysqli_query($connection,"INSERT INTO $table (pid,uid,Rupload_time,Rdescription, Rcontent, Rflag,extension)
 VALUES ($pid,$uid,now(),'$description', '$name', $flag,'$fileextension')") or die(mysqli_error($connection));
-}
-else
-{
-	echo 'false';
 }
 
 mysqli_close($connection);
@@ -98,7 +95,7 @@ if(mysqli_connect_error()) {
 	die("Database connection failed" . mysqli_connect_error() . "(" . mysqli_connect_errno().")"
 		);
 }
-$result= mysqli_query($connection, "SELECT * FROM $table ORDER BY Rupload_time DESC LIMIT 5" ) ;
+$result= mysqli_query($connection, "SELECT * FROM $table ORDER BY Rupload_time DESC" ) ;
  
 
 print "<table border=1>\n"; 
@@ -118,9 +115,8 @@ print "</td>\n";
 print "</tr>\n"; 
 } 
 print "</table>\n";  
+print "<a href='projdetail.php?pid=$pid'>Go back to Project Details</a>";
 
 ?> 
-
-
 </body>
 </html>
